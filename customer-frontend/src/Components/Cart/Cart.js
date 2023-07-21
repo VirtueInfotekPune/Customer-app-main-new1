@@ -6,6 +6,7 @@ const Cart = () => {
   // Fetch the cart items from localStorage and initialize state
   const initialCartItems = JSON.parse(localStorage.getItem('cart')) || [];
   const [cartItems, setCartItems] = useState(initialCartItems);
+  
 
   // Function to remove an item from the cart
   const removeItem = (index) => {
@@ -49,10 +50,15 @@ const Cart = () => {
       <div className="total-count">Total Cards: {cartItems.length}</div>
       <div className="total-price">Total Price: {totalPrice}Rs</div>
       <button className="place-order">
-        <Link to="/placeorder" state={{ totalPrice }}>Continue</Link>
+        <Link to="/placeorder" state={{ cartItems, totalPrice }}>Continue</Link>
       </button>
     </div>
   );
 };
 
 export default Cart;
+
+
+
+
+

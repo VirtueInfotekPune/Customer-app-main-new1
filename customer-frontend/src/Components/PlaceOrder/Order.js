@@ -1,29 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './Order.css';
-import axios from 'axios';
-import { useLocation,Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 const Order = () => {
   const location = useLocation();
-  const totalPrice = location.state ? location.state.totalPrice : 0;
+  const { cartItems, totalPrice } = location.state || {};
+  // console.log(cartItems)
 
-  const [orderDetails, setOrderDetails] = useState(null);
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('Cash on delivery');
 
   const isPlaceOrderDisabled = totalPrice === 0;
 
   useEffect(() => {
-    const fetchOrderDetails = async () => {
-      try {
-        const response = await axios.get('API_URL');
-        setOrderDetails(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchOrderDetails();
+    // You can implement any additional logic or fetch order details from the API here if needed
   }, []);
 
   // Function to handle the input change for delivery address
@@ -38,14 +28,16 @@ const Order = () => {
 
   // Function to handle placing the order and saving to local storage
   const handlePlaceOrder = () => {
-    // Save the order details to local storage and display in console
+    // Save the order details to local storage and display the cart item details in the console
     const orderData = {
+      cartItems: cartItems,
       totalPrice: totalPrice,
       deliveryAddress: deliveryAddress,
-      paymentMethod: selectedPaymentMethod // Add the selected payment method to order data
+      paymentMethod: selectedPaymentMethod,
       // Add other order data as needed
     };
-
+    // console.log(cartItems)
+    
     // Store the order data in local storage
     localStorage.setItem('order', JSON.stringify(orderData));
 
@@ -89,13 +81,21 @@ const Order = () => {
           Place Order
         </button>
 
-        <button><Link to="/home" className="continue-shoping">Continue Shoping</Link></button>
+        <button><Link to="/home" className="c-shop">Continue Shopping</Link></button>
       </div>
-      {orderDetails && (
+      {cartItems && cartItems.length > 0 && (
         <div className="order-details">
-          
-          <h2>Order Details:</h2>
-          {/* Display order details */}
+          {/* <h2>Order Details:</h2> */}
+          <ul>
+            {/* {cartItems.map((item, index) => (
+              <li key={index}>
+                <p>Product Name: {item.productname}</p>
+                <p>Brand: {item.brand}</p>
+                <p>Price: {item.productprice}</p>
+              </li>
+            ))} */}
+                {/* Add other product details as needed */}
+          </ul>
         </div>
       )}
     </div>

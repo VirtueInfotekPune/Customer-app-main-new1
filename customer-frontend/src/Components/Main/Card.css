@@ -63,13 +63,13 @@ h1 {
   .cards {
     justify-content: center;
     gap: 15px;
-    margin-top: 302px;
+    margin-top: 296px;
   }
 
   .card {
     justify-content: space-between;
     width: 38%;
-    height: 19vh;
+    height: 23vh;
   }
 
   .card-image {
