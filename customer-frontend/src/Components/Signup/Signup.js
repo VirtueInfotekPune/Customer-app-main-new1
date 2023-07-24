@@ -49,6 +49,7 @@ function Signup() {
     handleChange(e);
     const temp = city.getCitiesOfState("IN", e.target.value);
     setCitylist(temp);
+    // console.log(temp)
   }
 
   return (

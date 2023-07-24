@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Order.css';
 import { useLocation, Link } from 'react-router-dom';
+import axios from "axios"
 
 const Order = () => {
   const location = useLocation();
@@ -46,6 +47,17 @@ const Order = () => {
 
     // Perform any other actions you want when placing the order
     // For example, you can redirect to a confirmation page or perform an API call to submit the order to the server.
+
+    axios.post('http://127.0.0.1:8000/cart/api/orderlist/',orderData)
+
+    .then(response => {
+
+      console.log('Order Place Successfully :', response.data)
+    })
+    .catch(error => {
+
+      console.log('Error placing order : ' , error)
+    })
   };
 
   return (

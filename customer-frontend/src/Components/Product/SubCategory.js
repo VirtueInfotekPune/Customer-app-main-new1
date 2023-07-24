@@ -132,9 +132,10 @@ function SubcategoryPage(props) {
       <div className="mt-0 cards">
         {subcats.map((card) => (
           <div
-            key={card.id}
-            className="card"
-            style={{ backgroundColor: card.backcolor }}
+          key={card.id}
+          
+          className="card"
+          style={{ backgroundColor: card.backcolor }}
           >
             <img src={card.image} alt="card-image" className="card-image" />
             <div className="card-title">{card.subcategory}</div>
@@ -143,7 +144,7 @@ function SubcategoryPage(props) {
               state={{ subcategory: card.subcategory, category: category }}
               className="card-offer"
               style={{ backgroundColor: card.color }}
-            >
+              >
               {card.offer}
             </Link>
           </div>
